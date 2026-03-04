@@ -42,10 +42,12 @@ public class SecurityConfig {
     public CorsConfigurationSource corsSource() {
         var config = new CorsConfiguration();
         config.setAllowedOrigins(List.of(
-            "http://localhost:5173",
-            "http://localhost:3000",
-            "https://linksnap-api-6exx.onrender.com"
-        ));
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "https://linksnap-api-6exx.onrender.com",
+    "https://linksnap-pi.vercel.app",
+    "https://linksnap-9lr58y0j3-abdellahs-projects-2d987ea1.vercel.app"
+));
         config.setAllowedMethods(List.of("GET","POST","PUT","PATCH","DELETE","OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
