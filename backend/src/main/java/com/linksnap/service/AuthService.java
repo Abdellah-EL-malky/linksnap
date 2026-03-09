@@ -24,8 +24,12 @@ public class AuthService {
     }
 
     public AuthResponse login(AuthRequest req) {
+    try {
         authManager.authenticate(new UsernamePasswordAuthenticationToken(req.getEmail(), req.getPassword()));
-        User user = userRepo.findByEmail(req.getEmail()).orElseThrow();
-        return new AuthResponse(jwtUtil.generateToken(user.getEmail()), user.getEmail(), user.getFirstName(), user.getLastName());
+    } catch (BadCredentialsException e) {
+        throw new RuntimeException("Invalid credentials");
     }
+    User user = userRepo.findByEmail(req.getEmail()).orElseThrow();
+    return new AuthResponse(jwtUtil.generateToken(user.getEmail()), user.getEmail(), user.getFirstName(), user.getLastName());
+}
 }
